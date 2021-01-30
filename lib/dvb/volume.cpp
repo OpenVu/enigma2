@@ -194,7 +194,8 @@ void eDVBVolumecontrol::volumeMute()
 #ifdef HAVE_ALSA
 	eDebug("[eDVBVolumecontrol] Setvolume: ALSA Mute");
 	if (mainVolume)
-		snd_mixer_selem_set_playback_volume_all(mainVolume, 0);
+		//snd_mixer_selem_set_playback_volume_all(mainVolume, 0);
+		snd_mixer_selem_set_playback_volume(mainVolume, 0);
 	muted = true;
 #else
 	int fd = openMixer();
