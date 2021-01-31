@@ -144,6 +144,7 @@ void eDVBVolumecontrol::setVolume(int left, int right)
 #ifdef HAVE_ALSA
 	eDebug("[eDVBVolumecontrol] Setvolume: ALSA leftVol=%d", leftVol);
 	if (mainVolume)
+		//snd_mixer_selem_set_playback_volume_all(mainVolume, muted ? 0 : leftVol);
 		snd_mixer_selem_set_playback_volume_all(mainVolume, muted ? 0 : leftVol);
 #else
 		/* convert to -1dB steps */
@@ -218,7 +219,8 @@ void eDVBVolumecontrol::volumeUnMute()
 #ifdef HAVE_ALSA
 	eDebug("[eDVBVolumecontrol] Setvolume: ALSA unMute to %d", leftVol);
 	if (mainVolume)
-		snd_mixer_selem_set_playback_volume_all(mainVolume, leftVol);
+		//snd_mixer_selem_set_playback_volume_all(mainVolume, leftVol);
+		snd_mixer_selem_set_playback_volume(mainVolume, leftVol);
 	muted = false;
 #else
 	int fd = openMixer();
